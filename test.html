@@ -2,12 +2,15 @@
 <html>
   <head>
     <link rel="stylesheet" href="test.css">
-    <script type="text/javascript" src="./dist/obs-websocket.js"></script>
+    <script type='text/javascript' src="node_modules/obs-websocket-js/dist/obs-websocket.js"></script>
     <script  type="text/javascript" src="test.js"></script>
   </head>
   <body>
     <h1>Connect</h1>
-    <input id="address" placeholder="Address"><button id="address_button">Connect</button>
+    <form id='connectionInput'>
+    <input id="address" placeholder="Address" />
+    <button id="addressButton" type="submit">Connect</button>
+    </form>
     <h2>Scene List</h2>
     <div id="scene_list"></div>
     <div class="slidecontainer">
