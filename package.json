@@ -1,0 +1,22 @@
+{
+  "name": "obsproj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackiejane/obsjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jackiejane/obsjs/issues"
+  },
+  "homepage": "https://github.com/jackiejane/obsjs#readme",
+  "dependencies": {
+    "obs-websocket-js": "^4.0.2"
+  }
+}
