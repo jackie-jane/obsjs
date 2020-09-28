@@ -1,72 +1,35 @@
+
 window.onload = function () {
-  
-  const submitButton = document.querySelector('#addressButton')
-  
+
+  const obs = new OBSWebSocket();
+  const submitButton = document.querySelector('#addressButton');
+  const slider = document.querySelector('#myRange');
+
+  async function getSources() {
+    const data = await obs.send('GetSourcesList')
+    console.log(data)
+  }
+
   submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     const addressInput = document.getElementById('address').value;
     console.log(addressInput);
-    const obs = new OBSWebSocket();
     obs.connect({
       address: `localhost:${addressInput}`
     })
-   .then(() => {
-     console.log(`Success! We're connected & authenticated.`);
-   })
+      .then(() => {
+        console.log(`Success! We're connected & authenticated.`);
+        getSources()
+      })
+  })
+  slider.addEventListener('input', (e) => {
+    const newVolume = slider.value
+    const mul = slider.value * .01
+    const volumeIndicator = document.querySelector('#demo')
+    volumeIndicator.innerHTML = newVolume
+    obs.send('SetVolume', {
+      source: "Mic/Aux",
+      volume: mul
+    })
   })
 }
-
-
-
-
-// obs.connect({
-//   address: 'localhost:4444',
-// })
-//   .then(() => {
-//     console.log(`Success! We're connected & authenticated.`);
-//   })
-
-
-
-// handleClick = (e) => {
-// e
-// console.log('bang')
-// }
-
-// const addressButton = document.querySelectorAll('button')
-// addressButton.addEventListener('click', handleClick())
-
-// const slideValue = document.getElementById('myRange')
-// console.log(slideValue)
-
-
-
-// document.getElementById('address_button').addEventListener('click', e => {
-//   console.log('newAddress')
-  // obs.connect({
-  //   address: address
-  // });
-// });
-
-// obs.on('ConnectionOpened', () => {
-//   obs.send('GetSceneList').then(data => {
-//     const sceneListDiv = document.getElementById('scene_list');
-//     data.scenes.forEach(scene => {
-//       const sceneElement = document.createElement('button');
-//       sceneElement.textContent = scene.name;
-//       sceneElement.onclick = function() {
-//         obs.send('SetCurrentScene', {
-//           'scene-name': scene.name
-//         });
-//       };
-//       sceneListDiv.appendChild(sceneElement);
-//     });
-//   })
-// });
-
-// var slider = document.getElementById("myRange");
-// var output = document.getElementById("demo");
-// output.innerHTML = slider.value;
-// slider.oninput = function () {
-//   output.innerHTML = this.value;
-// }
